@@ -1,0 +1,28 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+        self.parent = None
+"""
+
+class Solution:
+    def lowestCommonAncestor(self, p: 'Node', q: 'Node') -> 'Node':
+        
+        def dfs(root, p, q):
+            if not root:
+                return None
+            if root.val == p.val or root.val == q.val:
+                return root
+            
+            left = dfs(root.left, p, q)
+            right = dfs(root.right, p, q)
+            if left and right:
+                return root
+            elif left:
+                return left
+            elif right:
+                return right
+        return dfs(root, p, q)
